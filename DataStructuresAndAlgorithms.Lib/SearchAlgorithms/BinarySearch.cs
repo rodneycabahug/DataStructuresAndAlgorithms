@@ -16,7 +16,6 @@ public class BinarySearch : ISearchAlgorithm
         {
             Console.WriteLine($"{nameof(BinarySearch)} Operation Count => {_opCounter}");
         }
-
     }
 
     private int Search(int[] array, int left, int right, int itemToFind)

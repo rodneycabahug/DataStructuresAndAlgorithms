@@ -25,6 +25,5 @@ public class LinearSearch : ISearchAlgorithm
         {
             Console.WriteLine($"{nameof(LinearSearch)} Operation Count => {opCounter}");
         }
-
     }
 }
