@@ -27,18 +27,18 @@ public class ArrayBasedStack<T> : IStack<T>
     public void Clear()
     {
         _top = -1;
-        Array.Resize(ref _stack, _initialCapacity);
+        //Array.Resize(ref _stack, _initialCapacity);
     }
 
     public bool Contains(T item) => Array.IndexOf(_stack, item, 0, _top + 1) >= 0;
 
-    public T? Peek() =>
-        _top == -1
+    public T Peek() =>
+        IsEmpty
             ? throw new InvalidOperationException(_emptyErrorMessage)
             : _stack[_top];
 
-    public T? Pop() =>
-        _top == -1
+    public T Pop() =>
+        IsEmpty
             ? throw new InvalidOperationException(_emptyErrorMessage)
             : _stack[_top--];
 
