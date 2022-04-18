@@ -1,7 +1,7 @@
 using DataStructuresAndAlgorithms.Lib.DataStructures;
 using Xunit;
 
-namespace CSharpDumps.DataStructuresAndAlgorithms.LibTests;
+namespace DataStructuresAndAlgorithms.LibTests;
 
 public class DoublyLinkedListTests
 {

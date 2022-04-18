@@ -3,7 +3,7 @@ using DataStructuresAndAlgorithms.Lib.DataStructures.Interfaces;
 using System;
 using Xunit;
 
-namespace CSharpDumps.DataStructuresAndAlgorithms.LibTests;
+namespace DataStructuresAndAlgorithms.LibTests;
 
 public class ListBasedStackTests
 {
