@@ -2,7 +2,7 @@
 
 namespace DataStructuresAndAlgorithms.Lib.DataStructures;
 
-public class ListBasedStack<T> : IStack<T>
+public class ListBasedStack<T> : IStack<T>, ISequence<T>
 {
     private const string _emptyErrorMessage = "Stack is empty.";
 
@@ -13,9 +13,7 @@ public class ListBasedStack<T> : IStack<T>
         _stack = new DoublyLinkedList<T>();
     }
 
-    public int Size => _stack.Count;
-
-    public bool IsEmpty => _stack.IsEmpty;
+    public int Count => _stack.Count;
 
     public void Clear() => _stack.Clear();
 
@@ -39,4 +37,9 @@ public class ListBasedStack<T> : IStack<T>
     }
 
     public void Push(T item) => _stack.AddLast(item);
+
+    public T[] ToArray()
+    {
+        throw new NotImplementedException();
+    }
 }

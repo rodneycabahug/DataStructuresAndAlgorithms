@@ -7,28 +7,11 @@ namespace DataStructuresAndAlgorithms.LibTests;
 
 public class ListBasedStackTests
 {
-    [Fact]
-    public void IsEmpty_Return_True_If_Empty()
-    {
-        IStack<string> stack = new ListBasedStack<string>();
-
-        Assert.True(stack.IsEmpty);
-    }
-
-    [Fact]
-    public void IsEmpty_Return_False_If_NotEmpty()
-    {
-        IStack<string> stack = new ListBasedStack<string>();
-
-        stack.Push("string");
-
-        Assert.False(stack.IsEmpty);
-    }
 
     [Fact]
     public void Size_Returns_The_Number_Of_Elements()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var expectedSize = 2;
 
         stack.Push("string");
@@ -36,13 +19,13 @@ public class ListBasedStackTests
         stack.Push("another string");
         stack.Push("and another");
 
-        Assert.Equal(expectedSize, stack.Size);
+        Assert.Equal(expectedSize, stack.Count);
     }
 
     [Fact]
     public void Peek_Returns_The_Top_Element()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var expectedResult = "expected";
 
         stack.Push("string");
@@ -58,7 +41,7 @@ public class ListBasedStackTests
     [Fact]
     public void Peek_Keeps_The_Top_Element()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var expectedResult = "expected";
         var expectedSize = 2;
 
@@ -70,15 +53,24 @@ public class ListBasedStackTests
         var peekResult = stack.Peek();
 
         Assert.Equal(expectedResult, peekResult);
-        Assert.Equal(expectedSize, stack.Size);
+        Assert.Equal(expectedSize, stack.Count);
     }
 
+    [Fact]
+    public void Peek_Throws_Exception_If_Empty()
+    {
+        var stack = new ListBasedStack<string>();
+        var expectedErrorMessage = "Stack is empty.";
 
+        var exception = Assert.Throws<InvalidOperationException>(() => stack.Peek());
+
+        Assert.Equal(expectedErrorMessage, exception.Message);
+    }
 
     [Fact]
     public void Push_Adds_The_Element_The_Top()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var expectedResult = "expected";
 
         stack.Push("string");
@@ -93,7 +85,7 @@ public class ListBasedStackTests
     [Fact]
     public void Pop_Returns_The_Top_Element()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var expectedResult = "expected";
 
         stack.Push("string");
@@ -108,7 +100,7 @@ public class ListBasedStackTests
     [Fact]
     public void Pop_Removes_The_Top_Element()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var expectedResult = "expected";
         var expectedSize = 2;
 
@@ -119,13 +111,13 @@ public class ListBasedStackTests
         var popResult = stack.Pop();
 
         Assert.Equal(expectedResult, popResult);
-        Assert.Equal(expectedSize, stack.Size);
+        Assert.Equal(expectedSize, stack.Count);
     }
 
     [Fact]
     public void Contains_Return_True_If_Exists()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var searchElement = "expected";
 
         stack.Push("string");
@@ -138,7 +130,7 @@ public class ListBasedStackTests
     [Fact]
     public void Contains_Return_False_If_NotExists()
     {
-        IStack<string> stack = new ListBasedStack<string>();
+        var stack = new ListBasedStack<string>();
         var searchElement = "expected1";
 
         stack.Push("string");
@@ -151,8 +143,8 @@ public class ListBasedStackTests
     [Fact]
     public void Clear_Empties_Stack()
     {
-        IStack<string> stack = new ListBasedStack<string>();
-        var expectedErrorMessage = "Stack is empty.";
+        var stack = new ListBasedStack<string>();
+        var expectedCount = 0;
 
         stack.Push("string");
         stack.Push("expected 1");
@@ -160,8 +152,6 @@ public class ListBasedStackTests
 
         stack.Clear();
 
-        Assert.True(stack.IsEmpty);
-        var exception = Assert.Throws<InvalidOperationException>(() => stack.Peek());
-        Assert.Equal(expectedErrorMessage, exception.Message);
+        Assert.Equal(expectedCount, stack.Count);
     }
 }

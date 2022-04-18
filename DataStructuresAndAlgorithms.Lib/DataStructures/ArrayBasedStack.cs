@@ -2,7 +2,7 @@
 
 namespace DataStructuresAndAlgorithms.Lib.DataStructures;
 
-public class ArrayBasedStack<T> : IStack<T>
+public class ArrayBasedStack<T> : IStack<T>, ISequence<T>
 {
     private const string _emptyErrorMessage = "Stack is empty.";
 
@@ -20,9 +20,7 @@ public class ArrayBasedStack<T> : IStack<T>
             _initialCapacity = capacity;
     }
 
-    public int Size => _top + 1;
-
-    public bool IsEmpty => _top == -1;
+    public int Count => _top + 1;
 
     public void Clear()
     {
@@ -33,12 +31,12 @@ public class ArrayBasedStack<T> : IStack<T>
     public bool Contains(T item) => Array.IndexOf(_stack, item, 0, _top + 1) >= 0;
 
     public T Peek() =>
-        IsEmpty
+        Count == 0
             ? throw new InvalidOperationException(_emptyErrorMessage)
             : _stack[_top];
 
     public T Pop() =>
-        IsEmpty
+        Count == 0
             ? throw new InvalidOperationException(_emptyErrorMessage)
             : _stack[_top--];
 
@@ -49,4 +47,6 @@ public class ArrayBasedStack<T> : IStack<T>
 
         _stack[++_top] = item;
     }
+
+    public T[] ToArray() => _stack;
 }
