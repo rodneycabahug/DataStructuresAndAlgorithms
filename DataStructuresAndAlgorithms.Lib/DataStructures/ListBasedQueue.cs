@@ -41,16 +41,5 @@ public class ListBasedQueue<T> : IQueue<T>, ISequence<T>
         return _queue.First;
     }
 
-    public T[] ToArray()
-    {
-        var result = new T[Count];
-
-        for (var i = 0; i < Count; i++)
-        {
-            result[i] = Dequeue();
-            Enqueue(result[i]);
-        }
-
-        return result;
-    }
+    public T[] ToArray() => _queue.ToArray();
 }
