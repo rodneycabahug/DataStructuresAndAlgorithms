@@ -1,7 +1,7 @@
 ﻿using DataStructuresAndAlgorithms.Lib.SearchAlgorithms.Interfaces;
 using DataStructuresAndAlgorithms.Lib.SortAlgorithms.Interfaces;
 
-namespace CSharpDumps.DataStructuresAndAlgorithms.Lib;
+namespace DataStructuresAndAlgorithms.Lib;
 
 public static class ArrayExtensions
 {

@@ -1,12 +1,6 @@
-using CSharpDumps.DataStructuresAndAlgorithms.Lib;
 using DataStructuresAndAlgorithms.Lib.DataStructures;
 using DataStructuresAndAlgorithms.Lib.DataStructures.Interfaces;
-using DataStructuresAndAlgorithms.Lib.SearchAlgorithms;
-using DataStructuresAndAlgorithms.Lib.SearchAlgorithms.Interfaces;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
 namespace CSharpDumps.DataStructuresAndAlgorithms.LibTests;

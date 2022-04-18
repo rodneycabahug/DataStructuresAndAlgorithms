@@ -1,4 +1,4 @@
-using CSharpDumps.DataStructuresAndAlgorithms.Lib;
+using DataStructuresAndAlgorithms.Lib;
 using DataStructuresAndAlgorithms.Lib.SearchAlgorithms;
 using DataStructuresAndAlgorithms.Lib.SearchAlgorithms.Interfaces;
 using System.Collections;
