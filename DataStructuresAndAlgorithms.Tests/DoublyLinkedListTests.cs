@@ -1,4 +1,5 @@
 using DataStructuresAndAlgorithms.Lib.DataStructures;
+using System.Linq;
 using Xunit;
 
 namespace DataStructuresAndAlgorithms.LibTests;
@@ -153,5 +154,22 @@ public class DoublyLinkedListTests
         Assert.Equal(expectedLast, list.Last);
         Assert.Equal(expectedCount, list.Count);
         Assert.False(list.Contains(itemToDelete));
+    }
+
+    [Fact]
+    public void ToArray_Returns_List_As_Array()
+    {
+        var items = Enumerable.Range(0, 5).Select(i => i.ToString()).ToArray();
+        var list = new DoublyLinkedList<string>(items);
+
+        var result = list.ToArray();
+
+        Assert.IsType<string[]>(result);
+        Assert.Equal(items.Length, result.Length);
+        for (int i = 0; i < items.Length; i++)
+        {
+            Assert.Equal(items[i], result[i]);
+        }
+        Assert.Equal(items.Length, list.Count);
     }
 }

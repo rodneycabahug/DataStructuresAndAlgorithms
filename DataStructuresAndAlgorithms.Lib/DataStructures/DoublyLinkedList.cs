@@ -1,10 +1,19 @@
-﻿namespace DataStructuresAndAlgorithms.Lib.DataStructures;
+﻿using DataStructuresAndAlgorithms.Lib.DataStructures.Interfaces;
 
-public class DoublyLinkedList<T>
+namespace DataStructuresAndAlgorithms.Lib.DataStructures;
+
+public class DoublyLinkedList<T> : ISequence<T>
 {
     private Node<T>? _first = default;
     private Node<T>? _last = default;
     private int _count = 0;
+
+    public DoublyLinkedList() { }
+
+    public DoublyLinkedList(T[] items)
+    {
+        foreach (var item in items) AddLast(item);
+    }
 
     public T? First
     {
@@ -41,21 +50,21 @@ public class DoublyLinkedList<T>
     {
         if (IsEmpty) return false;
 
-        var _firstPointer = _first;
-        var _lastPointer = _last;
+        var firstPointer = _first;
+        var lastPointer = _last;
 
         do
         {
-            if ((_firstPointer?.Value?.Equals(item) ?? false)
-                || (_lastPointer?.Value?.Equals(item) ?? false))
+            if ((firstPointer?.Value?.Equals(item) ?? false)
+                || (lastPointer?.Value?.Equals(item) ?? false))
             {
                 return true;
             }
 
-            _firstPointer = _firstPointer?.Next;
-            _lastPointer = _lastPointer?.Previous;
+            firstPointer = firstPointer?.Next;
+            lastPointer = lastPointer?.Previous;
 
-        } while (_firstPointer != null && _lastPointer != null);
+        } while (firstPointer != null && lastPointer != null);
 
         return false;
     }
@@ -133,6 +142,29 @@ public class DoublyLinkedList<T>
         _last.Next = null;
     }
 
+    public T[] ToArray()
+    {
+        var result = new T[Count];
+
+        if (IsEmpty) return result;
+
+        var leftPointer = _first;
+        var rightPointer = _last;
+        var leftIndex = 0;
+        var rightIndex = Count - 1;
+
+        do
+        {
+            result[leftIndex++] = leftPointer.Value;
+            if (leftPointer == rightPointer)
+                break;
+            leftPointer = leftPointer.Next;
+            result[rightIndex--] = rightPointer.Value;
+            rightPointer = rightPointer.Previous;
+        } while (true);
+
+        return result;
+    }
 
     public class Node<I>
     {
