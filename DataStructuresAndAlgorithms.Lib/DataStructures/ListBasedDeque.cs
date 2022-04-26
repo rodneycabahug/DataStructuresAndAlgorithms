@@ -18,6 +18,10 @@ public class ListBasedDeque<T> : IDeque<T>, ISequence<T>
 
     public int Count => _deque.Count;
 
+    public void Add(T item) => _deque.AddLast(item);
+
+    public void AddRange(T[] items) => _deque.AddRange(items);
+
     public void Clear() => _deque.Clear();
 
     public bool Contains(T item) => _deque.Contains(item);

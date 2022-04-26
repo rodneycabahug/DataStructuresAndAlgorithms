@@ -68,7 +68,32 @@ public class DoublyLinkedList<T> : ISequence<T>
 
         return false;
     }
-    
+
+    public bool Contains(Func<T, bool> predicate)
+    {
+        if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+
+        if (IsEmpty) return false;
+
+        var firstPointer = _first;
+        var lastPointer = _last;
+
+        do
+        {
+            if ((firstPointer != null && predicate(firstPointer.Value))
+                || (lastPointer != null && predicate(lastPointer.Value)))
+            {
+                return true;
+            }
+
+            firstPointer = firstPointer?.Next;
+            lastPointer = lastPointer?.Previous;
+
+        } while (firstPointer != null && lastPointer != null);
+
+        return false;
+    }
+
     public void AddFirst(T item)
     { 
         if (item is null) throw new ArgumentNullException(nameof(item));
@@ -156,7 +181,9 @@ public class DoublyLinkedList<T> : ISequence<T>
         do
         {
             result[leftIndex++] = leftPointer.Value;
-            if (leftPointer == rightPointer)
+            if (leftPointer.Next is null
+                || rightPointer.Previous is null
+                || leftPointer == rightPointer)
                 break;
             leftPointer = leftPointer.Next;
             result[rightIndex--] = rightPointer.Value;
@@ -164,6 +191,14 @@ public class DoublyLinkedList<T> : ISequence<T>
         } while (true);
 
         return result;
+    }
+
+    public void Add(T item) => AddLast(item);
+
+    public void AddRange(T[] items)
+    {
+        foreach (var item in items)
+            AddLast(item);
     }
 
     public class Node<I>

@@ -18,6 +18,10 @@ public class ListBasedQueue<T> : IQueue<T>, ISequence<T>
 
     public int Count => _queue.Count;
 
+    public void Add(T item) => _queue.AddLast(item);
+
+    public void AddRange(T[] items) => _queue.AddRange(items);
+
     public void Clear() => _queue.Clear();
 
     public bool Contains(T item) => _queue.Contains(item);

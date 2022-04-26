@@ -15,6 +15,10 @@ public class ListBasedStack<T> : IStack<T>, ISequence<T>
 
     public int Count => _stack.Count;
 
+    public void Add(T item) => _stack.Add(item);
+
+    public void AddRange(T[] items) => _stack.AddRange(items);
+
     public void Clear() => _stack.Clear();
 
     public bool Contains(T item) => _stack.Contains(item);
@@ -38,8 +42,5 @@ public class ListBasedStack<T> : IStack<T>, ISequence<T>
 
     public void Push(T item) => _stack.AddLast(item);
 
-    public T[] ToArray()
-    {
-        throw new NotImplementedException();
-    }
+    public T[] ToArray() => _stack.ToArray();
 }
