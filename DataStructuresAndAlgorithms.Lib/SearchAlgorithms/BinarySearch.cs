@@ -2,11 +2,11 @@
 
 namespace DataStructuresAndAlgorithms.Lib.SearchAlgorithms;
 
-public class BinarySearch : ISearchAlgorithm
+public class BinarySearch<T> : ISearchAlgorithm<T> where T : IComparable
 {
     private int _opCounter = 0;
 
-    public int Execute(int[] array, int itemToFind)
+    public int Execute(T[] array, T itemToFind)
     {
         try
         {
@@ -14,11 +14,11 @@ public class BinarySearch : ISearchAlgorithm
         }
         finally
         {
-            Console.WriteLine($"{nameof(BinarySearch)} Operation Count => {_opCounter}");
+            Console.WriteLine($"{nameof(BinarySearch<T>)} Operation Count => {_opCounter}");
         }
     }
 
-    private int Search(int[] array, int left, int right, int itemToFind)
+    private int Search(T[] array, int left, int right, T itemToFind)
     {
         _opCounter += 1;
 
@@ -27,10 +27,10 @@ public class BinarySearch : ISearchAlgorithm
 
         int middle = (left + right) / 2;
 
-        if (array[middle] == itemToFind)
+        if (array[middle].CompareTo(itemToFind) == 0)
             return middle;
 
-        if (array[middle] > itemToFind)
+        if (array[middle].CompareTo(itemToFind) > 0)
             return Search(array, left, middle - 1, itemToFind);
 
         //array[middle] < itemToFind

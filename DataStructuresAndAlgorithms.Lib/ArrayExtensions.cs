@@ -5,9 +5,9 @@ namespace DataStructuresAndAlgorithms.Lib;
 
 public static class ArrayExtensions
 {
-    public static int Search<T>(this int[] array, int itemToFind) where T : ISearchAlgorithm, new()
+    public static int Search<T, I>(this I[] array, I itemToFind) where T : ISearchAlgorithm<I>, new() where I : IComparable
     {
-        ISearchAlgorithm searchAlgorithm = new T();
+        ISearchAlgorithm<I> searchAlgorithm = new T();
         return searchAlgorithm.Execute(array, itemToFind);
     }
 

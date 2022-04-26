@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataStructuresAndAlgorithms.Lib.SearchAlgorithms.Interfaces;
 
-public interface ISearchAlgorithm
+public interface ISearchAlgorithm<T> where T : IComparable
 {
-    int Execute(int[] array, int itemToFind);
+    int Execute(T[] array, T itemToFind);
 }

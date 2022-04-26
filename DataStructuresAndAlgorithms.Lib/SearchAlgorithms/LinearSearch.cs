@@ -2,16 +2,16 @@
 
 namespace DataStructuresAndAlgorithms.Lib.SearchAlgorithms;
 
-public class LinearSearch : ISearchAlgorithm
+public class LinearSearch<T> : ISearchAlgorithm<T> where T : IComparable
 {
-    public int Execute(int[] array, int itemToFind)
+    public int Execute(T[] array, T itemToFind)
     {
         int opCounter = 0;
         try
         {
             for (int index = 0; index < array.Length; index++)
             {
-                if (array[index] == itemToFind)
+                if (array[index].CompareTo(itemToFind) == 0)
                 {
                     opCounter = index + 1;
                     return index;
@@ -23,7 +23,16 @@ public class LinearSearch : ISearchAlgorithm
         }
         finally
         {
-            Console.WriteLine($"{nameof(LinearSearch)} Operation Count => {opCounter}");
+            Console.WriteLine($"{nameof(LinearSearch<T>)} Operation Count => {opCounter}");
         }
+    }
+
+    public int Execute(T[] array, Func<T, bool> predicate)
+    {
+        for (int i = 0; i < array.Length; i++)
+            if (predicate(array[i]))
+                return i;
+
+        return -1;
     }
 }

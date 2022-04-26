@@ -14,7 +14,7 @@ public class BinarySearchTests
     [ClassData(typeof(TestDataGenerator))]
     public void Execute_Returns_Index_If_Found_Otherwise_NegativeOne(int[] array, int itemToFind, int expectedResult)
     {
-        ISearchAlgorithm algorithm = new BinarySearch();
+        ISearchAlgorithm<int> algorithm = new BinarySearch<int>();
 
         int searchResult = algorithm.Execute(array, itemToFind);
 
@@ -26,7 +26,7 @@ public class BinarySearchTests
     {
         int[] array = Enumerable.Range(0, 100).ToArray();
 
-        var searchResult = array.Search<BinarySearch>(88);
+        var searchResult = array.Search<BinarySearch<int>, int>(88);
 
         Assert.Equal(88, searchResult);
     }

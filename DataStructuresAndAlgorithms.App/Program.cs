@@ -17,10 +17,10 @@ Console.WriteLine();
 
 int index;
 
-index = array.Search<BinarySearch>(79);
+index = array.Search<BinarySearch<int>, int>(79);
 Console.WriteLine($"Index Of 79 => {index}");
 
 Console.WriteLine();
 
-index = array.Search<LinearSearch>(79);
+index = array.Search<LinearSearch<int>, int>(79);
 Console.WriteLine($"Index Of 79 => {index}");
