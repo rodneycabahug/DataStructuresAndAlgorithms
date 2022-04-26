@@ -127,7 +127,7 @@ public class ListBasedDequeTests
     }
 
     [Fact]
-    public void PushBackont_Adds_Item_At_Back()
+    public void PushBack_Adds_Item_At_Back()
     {
         var items = Enumerable.Range(1, 10).Select(i => i.ToString()).ToArray();
         var deque = new ListBasedDeque<string>(items);
