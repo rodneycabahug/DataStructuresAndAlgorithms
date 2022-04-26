@@ -2,7 +2,7 @@
 
 namespace DataStructuresAndAlgorithms.Lib.DataStructures;
 
-public class ListBasedDeque<T> : IDeque<T>, ISequence<T>
+public class ListBasedDeque<T> : IDeque<T>
 {
     private const string EmptyErrorMessage = "Deque is empty.";
 

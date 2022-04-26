@@ -2,7 +2,7 @@
 
 namespace DataStructuresAndAlgorithms.Lib.DataStructures;
 
-public class ArrayBasedStack<T> : IStack<T>, ISequence<T>
+public class ArrayBasedStack<T> : IStack<T>
 {
     private const string _emptyErrorMessage = "Stack is empty.";
 

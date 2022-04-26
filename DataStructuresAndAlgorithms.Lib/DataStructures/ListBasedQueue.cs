@@ -2,7 +2,7 @@
 
 namespace DataStructuresAndAlgorithms.Lib.DataStructures;
 
-public class ListBasedQueue<T> : IQueue<T>, ISequence<T>
+public class ListBasedQueue<T> : IQueue<T>
 {
     private const string EmptyErrorMessage = "Queue is empty.";
 
