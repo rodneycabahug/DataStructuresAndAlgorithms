@@ -22,6 +22,14 @@ public class ArrayBasedStack<T> : IStack<T>, ISequence<T>
 
     public int Count => _top + 1;
 
+    public void Add(T item) => Push(item);
+
+    public void AddRange(T[] items)
+    { 
+        foreach(var item in items)
+            Push(item);
+    }
+
     public void Clear()
     {
         _top = -1;
