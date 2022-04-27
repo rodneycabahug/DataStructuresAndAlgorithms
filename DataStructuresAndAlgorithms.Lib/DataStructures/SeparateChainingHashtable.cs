@@ -13,7 +13,7 @@ public class SeparateChainingHashtable<K, V> : IHashtable<K, V>
     private const string KeyDoesNotExistErrorMessage = "Key does not exist.";
     
     private const int DefaultTableSize = 64;
-    private const double LoadFactor = .64;
+    private const double LoadFactor = 1.28;
 
     private int _count = 0;
     private DoublyLinkedList<KeyValuePair<K, V>>[] _hashtable;
@@ -176,7 +176,26 @@ public class SeparateChainingHashtable<K, V> : IHashtable<K, V>
 
     public void Remove(K key)
     {
-        throw new NotImplementedException();
+        if (ContainsKey(key))
+        {
+            int index = GetHashtableIndex(key);
+            for (int i = 0; i < _hashtable[index].Count; i++)
+            {
+                var item = _hashtable[index].First;
+
+                _hashtable[index].RemoveFirst();
+                
+                if (key.Equals(item.Key))
+                {
+                    _count--;
+                    return;
+                }
+
+                _hashtable[index].AddLast(item);
+            }
+
+            throw new InvalidOperationException(KeyDoesNotExistErrorMessage);
+        }
     }
 
     public void SetValue(K key, V value)

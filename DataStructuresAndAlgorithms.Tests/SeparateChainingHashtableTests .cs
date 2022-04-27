@@ -192,4 +192,32 @@ public class SeparateChainingHashtableTests
         Assert.Equal(expectedCount, hashtable.Count);
         Assert.Equal(expectedValue, hashtable.GetValue(searchKey));
     }
+
+    [Fact]
+    public void Remove_Deletes_Item_If_Exists()
+    {
+        var items = Enumerable.Range(1, 80).Select(i => (i.ToString(), i.ToString())).ToArray();
+        var hashtable = new SeparateChainingHashtable<string, string>(items);
+        var searchKey = "2";
+        var expectedCount = 79;
+
+        hashtable.Remove(searchKey);
+
+        Assert.Equal(expectedCount, hashtable.Count);
+        Assert.False(hashtable.ContainsKey(searchKey));
+    }
+
+    [Fact]
+    public void Remove_Does_Nothing_If_NotExists()
+    {
+        var items = Enumerable.Range(1, 80).Select(i => (i.ToString(), i.ToString())).ToArray();
+        var hashtable = new SeparateChainingHashtable<string, string>(items);
+        var searchKey = "81";
+        var expectedCount = 80;
+
+        hashtable.Remove(searchKey);
+
+        Assert.Equal(expectedCount, hashtable.Count);
+        Assert.False(hashtable.ContainsKey(searchKey));
+    }
 }
