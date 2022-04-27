@@ -8,7 +8,8 @@ int[] array = Enumerable.Range(0, 20).Select(i => random.Next(0, 100)).ToArray()
 array.Print();
 Console.WriteLine();
 
-array.Sort<BubbleSort>();
+//array.Sort<BubbleSort>();
+array.Sort<MergeSort>();
 
 array.Print();
 Console.WriteLine();
