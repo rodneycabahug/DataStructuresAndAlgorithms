@@ -3,13 +3,14 @@ using DataStructuresAndAlgorithms.Lib.SearchAlgorithms;
 using DataStructuresAndAlgorithms.Lib.SortAlgorithms;
 
 var random = new Random();
-int[] array = Enumerable.Range(0, 20).Select(i => random.Next(0, 100)).ToArray();
+int[] array = Enumerable.Range(0, 10).Select(i => random.Next(0, 100)).ToArray();
 
 array.Print();
 Console.WriteLine();
 
 //array.Sort<BubbleSort>();
-array.Sort<MergeSort>();
+//array.Sort<MergeSort>();
+array.Sort<QuickSort>();
 
 array.Print();
 Console.WriteLine();
