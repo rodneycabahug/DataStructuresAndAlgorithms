@@ -23,11 +23,10 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures
             get => _type;
             set
             {
-                throw new NotImplementedException();
-                //if (_type == value)
-                //    return;
+                if (_type == value)
+                    return;
 
-                //_type = value;
+                _type = value;
             }
         }
 
