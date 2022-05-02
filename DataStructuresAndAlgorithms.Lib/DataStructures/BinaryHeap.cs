@@ -10,6 +10,7 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures
     public class BinaryHeap<T> : IBinaryHeap<T>
     {
         private const string HeapIsEmptyError = "Heap is empty.";
+        private const int PrintPadding = 6;
 
         private readonly Comparer<T> _comparer;
 
@@ -27,6 +28,10 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures
                     return;
 
                 _type = value;
+
+                var temp = new T[_size];
+                Array.Copy(_data, temp, _size);
+                Heapify(temp, true);
             }
         }
 
@@ -217,7 +222,30 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures
 
         public void Print()
         {
-            throw new NotImplementedException();
+            if (typeof(T) != typeof(int))
+                throw new NotImplementedException();
+
+            if (_size == 0)
+                return;
+
+            Print(0, 0);
+        }
+
+        private void Print(int index, int printPadding)
+        {
+            if (index >= _size)
+                return;
+
+            var rightChildIndex = index * 2 + 2;
+            var leftChildIndex = index * 2 + 1;
+
+            Print(rightChildIndex, printPadding + PrintPadding);
+
+            Console.WriteLine();
+            Console.Write(new String(' ', printPadding));
+            Console.WriteLine(_data[index]);
+
+            Print(leftChildIndex, printPadding + PrintPadding);
         }
     }
 }

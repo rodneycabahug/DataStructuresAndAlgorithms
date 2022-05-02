@@ -253,5 +253,22 @@ namespace DataStructuresAndAlgorithms.LibTests
             Assert.Equal(expectedRoot, heap.Peek());
             Assert.Equal(expectedSize, heap.Size);
         }
+
+        [Fact]
+        public void Type_Flip_Min_Max()
+        {
+            var random = new Random();
+            var items = Enumerable.Range(0, 20).Select(i => random.Next(10, 100)).ToArray();
+            var heap = new BinaryHeap<int>(items);
+            var expectedRoot = items.Min();
+            var expectedNewRoot = items.Max();
+
+            var root = heap.Peek();
+            heap.Type = BinaryHeapType.MaxHeap;
+            var newRoot = heap.Peek();
+
+            Assert.Equal(expectedRoot, root);
+            Assert.Equal(expectedNewRoot, newRoot);
+        }
     }
 }
