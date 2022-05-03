@@ -2,7 +2,6 @@
 using DataStructuresAndAlgorithms.Lib.DataStructures.Interfaces;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -269,6 +268,39 @@ namespace DataStructuresAndAlgorithms.LibTests
 
             Assert.Equal(expectedRoot, root);
             Assert.Equal(expectedNewRoot, newRoot);
+        }
+
+        [Fact]
+        public void Heap_Works_With_Complex_Tyes()
+        {
+            var items = Enumerable.Range(1, 20).Select(i => new KeyValuePair<int, string>(i, i.ToString())).ToArray();
+            var heap = new BinaryHeap<KeyValuePair<int, string>>(items,new KeyValuePairComparer());
+            var expectedMinData = "1";
+            var expectedMaxData = "20";
+
+            var min = heap.Peek();
+
+            heap.Type = BinaryHeapType.MaxHeap;
+
+            var max = heap.Peek();
+
+            Assert.Equal(expectedMinData, min.Value);
+            Assert.Equal(expectedMaxData, max.Value);
+
+        }
+    }
+
+    class KeyValuePairComparer : System.Collections.Generic.Comparer<KeyValuePair<int, string>>
+    {
+        public override int Compare(KeyValuePair<int, string>? x, KeyValuePair<int, string>? y)
+        {
+            if ((x?.Key ?? int.MinValue) < (y?.Key ?? int.MinValue))
+                return -1;
+
+            if ((x?.Key ?? int.MinValue) > (y?.Key ?? int.MinValue))
+                return 1;
+
+            return 0;
         }
     }
 }

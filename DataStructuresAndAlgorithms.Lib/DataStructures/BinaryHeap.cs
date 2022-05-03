@@ -53,6 +53,8 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures
 
         public BinaryHeap(T[] items) : this(items, BinaryHeapType.MinHeap, Comparer<T>.Default) { }
 
+        public BinaryHeap(T[] items, Comparer<T> comparer) : this(items, BinaryHeapType.MinHeap, comparer) { }
+
         public BinaryHeap(T[] items, BinaryHeapType type, Comparer<T> comparer)
         {
             _data = new T[items.Length * (int)(LoadFactor * 200) / 100];
