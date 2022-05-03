@@ -21,7 +21,7 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures.Interfaces
         T Replace(T item);
 
         T? Search(T item);
-        void Delete(T item);
+        bool Delete(T item);
         void Print();
     }
 }

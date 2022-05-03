@@ -288,6 +288,68 @@ namespace DataStructuresAndAlgorithms.LibTests
             Assert.Equal(expectedMaxData, max.Value);
 
         }
+        
+        [Fact]
+        public void Search_Returns_Item_In_Heap_If_Found()
+        {
+            var items = Enumerable.Range(1, 20).Select(i => new KeyValuePair<int, string>(i, i.ToString())).ToArray();
+            var heap = new BinaryHeap<KeyValuePair<int, string>>(items, new KeyValuePairComparer());
+            var expectedData = "10";
+
+            var item = heap.Search(new KeyValuePair<int, string>(10, "10"));
+
+            Assert.Equal(expectedData, item?.Value);
+        }
+
+        [Fact]
+        public void Search_Returns_Null_If_Not_Found()
+        {
+            var items = Enumerable.Range(1, 20).Select(i => new KeyValuePair<int, string>(i, i.ToString())).ToArray();
+            var heap = new BinaryHeap<KeyValuePair<int, string>>(items, new KeyValuePairComparer());
+
+            var item = heap.Search(new KeyValuePair<int, string>(21, "10"));
+
+            Assert.Null(item);
+        }
+
+        [Fact]
+        public void Delete_Returns_True_If_Deleted()
+        {
+            var items = Enumerable.Range(1, 20).Select(i => new KeyValuePair<int, string>(i, i.ToString())).ToArray();
+            var heap = new BinaryHeap<KeyValuePair<int, string>>(items, new KeyValuePairComparer());
+            var expectedResult = true;
+
+            var result = heap.Delete(new KeyValuePair<int, string>(1, "1"));
+
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void Delete_Decrements_Size_If_Deleted()
+        {
+            var items = Enumerable.Range(1, 20).Select(i => new KeyValuePair<int, string>(i, i.ToString())).ToArray();
+            var heap = new BinaryHeap<KeyValuePair<int, string>>(items, new KeyValuePairComparer());
+            var expectedSize = 19;
+
+            _ = heap.Delete(new KeyValuePair<int, string>(1, "1"));
+
+            Assert.Equal(expectedSize, heap.Size);
+        }
+
+        [Fact]
+        public void Delete_Reorders_The_Heap()
+        {
+            var random = new Random();
+            var items = Enumerable.Range(1, 20).Select(i =>
+                new KeyValuePair<int, string>(random.Next(0, 100), random.Next(0, 100).ToString())).ToArray();
+            var heap = new BinaryHeap<KeyValuePair<int, string>>(items, new KeyValuePairComparer());
+            var expectedRootKey = items.OrderBy(kvp => kvp.Key).ToArray()[1];
+            var itemToDelete = items.Min(new KeyValuePairComparer());
+
+            _ = heap.Delete(itemToDelete);
+
+            Assert.Equal(expectedRootKey.Value, heap.Peek().Value);
+        }
     }
 
     class KeyValuePairComparer : System.Collections.Generic.Comparer<KeyValuePair<int, string>>

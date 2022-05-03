@@ -140,12 +140,49 @@ namespace DataStructuresAndAlgorithms.Lib.DataStructures
 
         public T? Search(T item)
         {
-            throw new NotImplementedException();
+            var index = Search(0, item);
+            if (index < 0)
+                return default;
+
+            return _data[index];
         }
 
-        public void Delete(T item)
+        public bool Delete(T item)
         {
-            throw new NotImplementedException();
+            var index = Search(0, item);
+            if (index < 0)
+                return false;
+
+            _size--;
+            (_data[index], _data[_size]) = (_data[_size], _data[index]);
+
+            var parentIndex = (index - 1) / 2;
+            if ((Type == BinaryHeapType.MinHeap && _comparer.Compare(_data[index], _data[parentIndex]) < 0)
+                || (Type == BinaryHeapType.MaxHeap && _comparer.Compare(_data[index], _data[parentIndex]) > 0))
+                SiftUp(index);
+            else
+                SiftDown(index);
+
+            return true;
+        }
+
+        private int Search(int index, T item)
+        {
+            if (index >= _size)
+                return -1;
+
+            if (_comparer.Compare(_data[index], item) == 0)
+                return index;
+
+            var leftResult = Search(index * 2 + 1, item);
+            if (leftResult != -1)
+                return leftResult;
+
+            var rightResult = Search(index * 2 + 2, item);
+            if (rightResult != -1)
+                return rightResult;
+
+            return -1;
         }
 
         private void SiftUp(int index)
